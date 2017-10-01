@@ -1,0 +1,15 @@
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\bin\Release\WPF_HW1.exe.config
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\bin\Release\WPF_HW1.exe
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\bin\Release\WPF_HW1.pdb
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\LoginWindow.g.cs
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\MainWindow.g.cs
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\App.g.cs
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1_MarkupCompile.cache
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1_MarkupCompile.lref
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\LoginWindow.baml
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\MainWindow.baml
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1.g.resources
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1.Properties.Resources.resources
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1.csproj.GenerateResource.Cache
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1.exe
+c:\users\oleksandr\documents\visual studio 2015\Projects\WPF_HW1\WPF_HW1\obj\Release\WPF_HW1.pdb
