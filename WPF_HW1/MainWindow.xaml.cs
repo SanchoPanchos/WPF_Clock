@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
+//Наступні бібліотеки можна не підключати
+/*using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;*/
 using System.Windows;
-using System.Windows.Controls;
+//Наступні бібліотеки можна не підключати
+/*using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Shapes;*/
 using WPF_HW1.UserControls;
 
 namespace WPF_HW1
@@ -29,9 +31,11 @@ namespace WPF_HW1
             loginUserControl.loginRegisterButton.Click += RegisterButton_Click;
             loginUserControl.loginButton.Click += LoginButton_Click;
             mainUserControl.logoutButton.Click += LogoutButton_Click;
-            
+
 
         }
+
+        //Можливо варто було б не всю логіку прописувати в одному класі
 
         private void RegisterButton_Click1(object sender, RoutedEventArgs e)
         {
@@ -62,7 +66,8 @@ namespace WPF_HW1
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if(String.IsNullOrEmpty(loginUserControl.username.Text) || (String.IsNullOrEmpty(loginUserControl.password.Text))){
+            if (String.IsNullOrEmpty(loginUserControl.username.Text) || (String.IsNullOrEmpty(loginUserControl.password.Text)))
+            {
                 //Вывести ошибку
             }
             else

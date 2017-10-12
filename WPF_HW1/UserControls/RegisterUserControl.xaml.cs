@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
+//Наступні бібліотеки можна не підключати
+/*using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;*/
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+//Наступні бібліотеки можна не підключати
+/*using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Shapes;*/
 
 namespace WPF_HW1.UserControls
 {
@@ -20,6 +22,7 @@ namespace WPF_HW1.UserControls
     /// </summary>
     public partial class RegisterUserControl : UserControl
     {
+        //Скоріш за все, більш правильним прописати функцію кнопки "зареєструватись" тут
         public RegisterUserControl()
         {
             InitializeComponent();
