@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="470" d:DesignWidth="300">
     <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="64,20,0,0" TextWrapping="Wrap" Text="Register" VerticalAlignment="Top" RenderTransformOrigin="-0.517,0.5" FontSize="18"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="64,10,0,0" TextWrapping="Wrap" Text="Register" VerticalAlignment="Top" RenderTransformOrigin="-0.517,0.5" FontSize="18"/>
         <xctk:WatermarkTextBox Watermark="Petya12" x:Name="username" HorizontalAlignment="Left" Height="30" Margin="64,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="16" />
         <xctk:WatermarkPasswordBox Watermark="Sup3rPa$$w0rd" x:Name="password" HorizontalAlignment="Left" Height="30" Margin="64,287,0,0" VerticalAlignment="Top" Width="144" FontSize="16" />
         <Button x:Name="registerButton" Content="Register" HorizontalAlignment="Left" Margin="87,332,0,0" VerticalAlignment="Top" Width="90" Height="30"/>
@@ -22,5 +22,6 @@
         <TextBlock x:Name="textBlock_surname" HorizontalAlignment="Left" Margin="64,103,0,0" TextWrapping="Wrap" Text="Surname" VerticalAlignment="Top"/>
         <xctk:WatermarkTextBox Watermark="p.pyat@aaa.com" x:Name="email" HorizontalAlignment="Left" Height="30" Margin="64,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="16" />
         <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="64,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Email"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="registerError" HorizontalAlignment="Left" Margin="64,34,0,0" TextWrapping="Wrap" Text="Some fields are empty!" VerticalAlignment="Top" Foreground="Red"/>
     </Grid>
 </UserControl>

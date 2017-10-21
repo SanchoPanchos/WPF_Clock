@@ -1,21 +1,10 @@
 ﻿using System;
-//Наступні бібліотеки можна не підключати
-/*using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;*/
+using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-//Наступні бібліотеки можна не підключати
-/*using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;*/
 using WPF_HW1.Model;
+using WPF_HW1.Utils;
 
 namespace WPF_HW1.UserControls
 {
@@ -26,6 +15,10 @@ namespace WPF_HW1.UserControls
         public MainUserControl()
         {
             InitializeComponent();
+            if (UserManager.GetCurrentUser() != null)
+            {
+                welcome.Text = "Welcome, " + UserManager.GetCurrentUser()._name;
+            }
 
         }
 
@@ -35,18 +28,49 @@ namespace WPF_HW1.UserControls
             StackPanel myStackPanel = new StackPanel();
             myStackPanel.Orientation = Orientation.Horizontal;
             TextBlock myTextBlock = new TextBlock();
-            myTextBlock.Text = DateTime.Now.ToString("h:mm:ss");
+            Thread myThread = new Thread(SetTime);
+            myThread.Start(myTextBlock);
             myTextBlock.Margin = new Thickness(10, 0, 40, 0);
             ComboBox myComboBox = new ComboBox();
             myComboBox.Margin = new Thickness(10, 0, 40, 0);
-            myComboBox.Items.Add("UTC-0");
-            myComboBox.Items.Add("UTC+1");
-            myComboBox.Items.Add("UTC+2");
+            for (int i = 0; i < Constants.TimeZones.Count; i++)
+            {
+               
+                    myComboBox.Items.Add(Constants.TimeZones[i]);
+                
+            }
             myComboBox.SelectedIndex = 1;
+            myComboBox.SelectionChanged += MyComboBox_SelectionChanged;
             myStackPanel.Children.Add(myTextBlock);
             myStackPanel.Children.Add(myComboBox);
             myListBoxItem.Content = myStackPanel;
             listBox.Items.Add(myListBoxItem);
+            LogManager.Log(Constants.AddedNewTimeClock);
+        }
+
+        private void SetTime(object obj)
+        {
+            TextBlock textBlock = obj as TextBlock;
+            while (true)
+            {
+                textBlock.Dispatcher.Invoke((Action)delegate
+
+                {
+
+                    textBlock.Text = DateTime.Now.ToString(Constants.TimeFormat);
+
+                });
+
+                Thread.Sleep(100);
+            }
+        }
+
+        private void MyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combobox = sender as ComboBox;
+            combobox.IsEnabled = false;
+            listBox.Items.SortDescriptions.Add(new SortDescription("Content",
+       ListSortDirection.Ascending));
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -54,10 +78,19 @@ namespace WPF_HW1.UserControls
             if (listBox.SelectedIndex != -1)
             {
                 listBox.Items.RemoveAt(listBox.SelectedIndex);
+                LogManager.Log(Constants.RemovedTimeClock);
             }
             else
             {
-                //Показать сообщение
+                try
+                {
+                    LogManager.Log(Constants.NoItemSelected);
+                }
+                catch (TypeInitializationException ex)
+                {
+                    Console.WriteLine(ex.InnerException);
+                }
+
             }
 
         }

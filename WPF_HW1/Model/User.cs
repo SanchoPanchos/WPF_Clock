@@ -1,22 +1,31 @@
 ﻿using System;
-//Наступні бібліотеки можна не підключати
-/*using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;*/
+using System.Collections.Generic;
 
 namespace WPF_HW1.Model
 {
-    class User
+    public class User
     {
-        private int _id { get; set; }
-        private string _name { get; set; }
-        private string _surname { get; set; }
-        private string _username { get; set; }
-        private string _email { get; set; }
-        private string password { get; set; }
+        public int _id { get; set; }
+        public string _name { get; set; }
+        public string _surname { get; set; }
+        public string _username { get; set; }
+        public string _email { get; set; }
+        public string _password { get; set; }
 
-        public User(int id, string name, string surname, string username, string email, string password)
+        public List<TimeClock> _timeClocks { get; set; }
+
+        public User(int id, string name, string surname, string username, string email, string password, List<TimeClock> timeClocks)
+        {
+            _id = id;
+            _name = name;
+            _surname = surname;
+            _username = username;
+            _email = email;
+            _password = password;
+            _timeClocks = timeClocks;
+        }
+
+        public User()
         {
 
         }
