@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace WPF_HW1.Utils
 {
@@ -49,7 +50,7 @@ namespace WPF_HW1.Utils
             string path = Path.Combine(foldername,
              filename + fileExtension);
             if (!File.Exists(path))
-                return "";
+                return Guid.NewGuid().ToString();
             return File.ReadAllText(path);
         }
 

@@ -10,8 +10,7 @@
         Background="#cdc"
         Title="MainWindow" Height="400" Width="300">
     <Grid>
-        <userControl:RegisterUserControl x:Name="registerUserControl"/>
-        <userControl:LoginUserControl x:Name="loginUserControl"/>
-        <userControl:MainUserControl x:Name="mainUserControl"/>
+        <ContentControl Name="MainControl"/>
+        
     </Grid>
 </Window>

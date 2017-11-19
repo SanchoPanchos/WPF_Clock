@@ -1,7 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
+using System.Linq;
 using System.Windows.Controls;
 using WPF_HW1.Model;
 using WPF_HW1.Utils;
@@ -10,54 +11,113 @@ namespace WPF_HW1.UserControls
 {
     public partial class MainUserControl : UserControl
     {
-
+        private MainWindow parentWindow;
 
         public MainUserControl()
         {
             InitializeComponent();
-            if (UserManager.GetCurrentUser() != null)
-            {
-                welcome.Text = "Welcome, " + UserManager.GetCurrentUser()._name;
-            }
+            logoutButton.Click += LogoutButton_Click;
+            parentWindow = Application.Current.MainWindow as MainWindow;
+            welcome.Text = "Welcome, " + UserManager.GetCurrentUser().Name;
+            FillTimeClocks();
+            
+        }
 
+        private void FillTimeClocks()
+        {
+            List<TimeClock> timeClocks = EntityWrapper.GetTimeClocksByUserId(UserManager.GetCurrentUser().Guid);
+            List<TimeClockItem> timeClockItems = new List<TimeClockItem>();
+            for(int i = 0; i < timeClocks.Count; i++)
+            {
+                timeClockItems.Add(new TimeClockItem(timeClocks[i].Offset, timeClocks[i].Name, timeClocks[i].Guid));
+            }
+            listBox.ItemsSource = timeClockItems;
+            for (int i = 0; i < timeClockItems.Count; i++)
+            {
+                AddThread(timeClockItems[i]);
+            }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReadWriteManager.DeleteFile(Constants.ClientDataDirPath, "Data", ".txt");
+            parentWindow.ShowLogin();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem myListBoxItem = new ListBoxItem();
-            StackPanel myStackPanel = new StackPanel();
-            myStackPanel.Orientation = Orientation.Horizontal;
-            TextBlock myTextBlock = new TextBlock();
-            Thread myThread = new Thread(SetTime);
-            myThread.Start(myTextBlock);
-            myTextBlock.Margin = new Thickness(10, 0, 40, 0);
-            ComboBox myComboBox = new ComboBox();
-            myComboBox.Margin = new Thickness(10, 0, 40, 0);
-            for (int i = 0; i < Constants.TimeZones.Count; i++)
+            List<TimeClockItem> list = listBox.Items.Cast<TimeClockItem>().ToList();
+            if (list.Count == Constants.TimeZonesNames.Count)
             {
-               
-                    myComboBox.Items.Add(Constants.TimeZones[i]);
-                
+                addButton.IsEnabled = false;
+                return;
+            }   
+            //Вытащить список уже добавленных
+            List<String> newList = new List<String>();
+            newList.InsertRange(0, Constants.TimeZonesNames);
+            //Создать стринговый список из оставшися незанятых названий зон
+            for (int i =0; i < list.Count; i++)
+            {
+                newList.Remove(list[i].SelectedName);
             }
-            myComboBox.SelectedIndex = 1;
-            myComboBox.SelectionChanged += MyComboBox_SelectionChanged;
-            myStackPanel.Children.Add(myTextBlock);
-            myStackPanel.Children.Add(myComboBox);
-            myListBoxItem.Content = myStackPanel;
-            listBox.Items.Add(myListBoxItem);
+            newList.Insert(0, "<Please select ...>");
+
+            //засетить
+            TimeClockItem item = new TimeClockItem(newList);
+            item.ComboBox.SelectionChanged += ComboBox_SelectionChanged;
+
+            List<TimeClockItem> temp = listBox.Items.Cast<TimeClockItem>().ToList();
+            temp.Add(item);
+            listBox.ItemsSource = temp;
             LogManager.Log(Constants.AddedNewTimeClock);
+            addButton.IsEnabled = false;
         }
 
-        private void SetTime(object obj)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TextBlock textBlock = obj as TextBlock;
+            ComboBox combobox = sender as ComboBox;
+            List<TimeClockItem> list = listBox.Items.Cast<TimeClockItem>().ToList();
+            for(int i = 0; i < list.Count; i++)
+            {
+                if (list[i].ComboBox.Equals(combobox))
+                {
+                    list[i].SelectedName = combobox.SelectedValue.ToString();
+                    for(int j = 0; j < Constants.TimeZonesNames.Count; j++)
+                    {
+                        if (Constants.TimeZonesNames[j].Equals(combobox.SelectedValue.ToString()))
+                        {
+                            list[i].Offset = j - 11;
+                            list[i].TextBlock.Text = list[i].Offset.ToString();
+                            AddThread(list[i]);
+                            TimeClock temp = new TimeClock(list[i].Offset, list[i].SelectedName, UserManager.GetCurrentUser());
+                            EntityWrapper.AddTimeClock(temp);
+                            list[i].Guid = temp.Guid;
+                            break;
+                        }
+                    }
+                }
+            }
+            combobox.IsEnabled = false;
+            addButton.IsEnabled = true;
+        }
+
+        private void AddThread(TimeClockItem item)
+        {
+            Thread myThread = new Thread(SetTime);
+            myThread.Start(item);
+        }
+
+        private void SetTime(Object obj)
+        {
+            TimeClockItem item = obj as TimeClockItem;
+            
             while (true)
             {
-                textBlock.Dispatcher.Invoke((Action)delegate
+                item.TextBlock.Dispatcher.Invoke((Action)delegate
 
                 {
 
-                    textBlock.Text = DateTime.Now.ToString(Constants.TimeFormat);
+                    item.TextBlock.Text = DateTime.Now.AddHours(item.Offset).ToString(Constants.TimeFormat);
 
                 });
 
@@ -65,19 +125,14 @@ namespace WPF_HW1.UserControls
             }
         }
 
-        private void MyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox combobox = sender as ComboBox;
-            combobox.IsEnabled = false;
-            listBox.Items.SortDescriptions.Add(new SortDescription("Content",
-       ListSortDirection.Ascending));
-        }
-
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (listBox.SelectedIndex != -1)
             {
-                listBox.Items.RemoveAt(listBox.SelectedIndex);
+                List<TimeClockItem> list = listBox.Items.Cast<TimeClockItem>().ToList();
+                EntityWrapper.DeleteTimeClock(list[listBox.SelectedIndex].Guid);
+                list.RemoveAt(listBox.SelectedIndex);
+                listBox.ItemsSource = list;
                 LogManager.Log(Constants.RemovedTimeClock);
             }
             else

@@ -5,16 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_HW1.UserControls"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid x:Name="LoginGrid">
+        
 
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="74,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" RenderTransformOrigin="-0.517,0.5" FontSize="18"/>
+
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="74,10,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" RenderTransformOrigin="-0.517,0.5" FontSize="18"/>
         <xctk:WatermarkTextBox Watermark="Petya12" x:Name="username" HorizontalAlignment="Left" Height="30" Margin="74,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="16" />
         <xctk:WatermarkPasswordBox Watermark="Sup3rPa$$w0rd" x:Name="password" HorizontalAlignment="Left" Height="30" Margin="74,97,0,0" VerticalAlignment="Top" Width="144" FontSize="16" />
         <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="98,146,0,0" VerticalAlignment="Top" Width="90" Height="30"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="74,197,0,0" TextWrapping="Wrap" Text="Don't have account?" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="loginRegisterButton" Content="Register" HorizontalAlignment="Left" Margin="98,234,0,0" VerticalAlignment="Top" Width="90" Height="30"/>
         <TextBlock x:Name="errorLogin" HorizontalAlignment="Left" Margin="74,39,0,0" TextWrapping="Wrap" Text="Username or pass is empty!" VerticalAlignment="Top" Foreground="Red" Visibility="Hidden"/>
+        <fa:ImageAwesome  Name="LoginLoader" Icon="Refresh" Width="50" Height="50" Spin="True" SpinDuration="1.2" Margin="0,-100,0,0" Visibility="Hidden"/>
+            
+            
     </Grid>
 </UserControl>

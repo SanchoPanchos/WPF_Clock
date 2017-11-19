@@ -6,14 +6,31 @@
              xmlns:local="clr-namespace:WPF_HW1.UserControls"
              mc:Ignorable="d" d:DesignWidth="500" Height="250">
     <Grid>
-        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="12,38,0,0" VerticalAlignment="Top" Width="75" Height="80" Click="addButton_Click"/>
-        <Button x:Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Margin="12,160,0,0" VerticalAlignment="Top" Width="75" Height="80" Click="deleteButton_Click"/>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="202" Margin="116,38,0,0" VerticalAlignment="Top" Width="354" />
-            <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="395,10,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock x:Name="welcome" HorizontalAlignment="Left" Margin="12,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Welcome, username"/><LineBreak/><Run/></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="78*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="78*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock x:Name="welcome" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"><Run Text="Welcome, username"/><LineBreak/><Run/></TextBlock>
+        </StackPanel>
 
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Width="75" Height="80" Click="addButton_Click"/>
+            <Button x:Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="80" Click="deleteButton_Click"/>
+        </StackPanel>
 
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="290,10,0,0" VerticalAlignment="Top" Width="75"/>
+        </StackPanel>
 
+        <StackPanel Grid.Column="1" Grid.Row="1" Name="TimeClocksPanel">
+            <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="202" Margin="10,5,0,0" VerticalAlignment="Top" Width="354" HorizontalContentAlignment="Stretch"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>

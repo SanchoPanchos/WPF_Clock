@@ -6,13 +6,18 @@ namespace WPF_HW1.Utils
 {
     public class UserManager
     {
-        public static User GetCurrentUser(){
-            return new JavaScriptSerializer().Deserialize<User>(ReadWriteManager.ReadFromFile(Constants.ClientDataDirPath, "Data", ".txt"));
+        
+        public static Guid GetCurrentUserID(){
+            return Guid.Parse(ReadWriteManager.ReadFromFile(Constants.ClientDataDirPath, "Data", ".txt"));
         }
 
-        public static void SaveCurrentUser(User user){
-            string json = new JavaScriptSerializer().Serialize(user);
-            ReadWriteManager.WriteToFile(Constants.ClientDataDirPath, "Data", ".txt", json);
+        public static void SaveCurrentUserID(Guid guid){
+            ReadWriteManager.WriteToFile(Constants.ClientDataDirPath, "Data", ".txt", guid.ToString());
+        }
+
+        public static User GetCurrentUser()
+        {
+            return EntityWrapper.GetUserByGuid(GetCurrentUserID());
         }
     }
 }

@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_HW1.UserControls"
               xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d"
              d:DesignHeight="470" d:DesignWidth="300">
-    <Grid>
+    <Grid Name="RegisterGrid">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="64,10,0,0" TextWrapping="Wrap" Text="Register" VerticalAlignment="Top" RenderTransformOrigin="-0.517,0.5" FontSize="18"/>
         <xctk:WatermarkTextBox Watermark="Petya12" x:Name="username" HorizontalAlignment="Left" Height="30" Margin="64,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="16" />
         <xctk:WatermarkPasswordBox Watermark="Sup3rPa$$w0rd" x:Name="password" HorizontalAlignment="Left" Height="30" Margin="64,287,0,0" VerticalAlignment="Top" Width="144" FontSize="16" />
@@ -23,5 +24,6 @@
         <xctk:WatermarkTextBox Watermark="p.pyat@aaa.com" x:Name="email" HorizontalAlignment="Left" Height="30" Margin="64,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="16" />
         <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="64,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Email"/><LineBreak/><Run/></TextBlock>
         <TextBlock x:Name="registerError" HorizontalAlignment="Left" Margin="64,34,0,0" TextWrapping="Wrap" Text="Some fields are empty!" VerticalAlignment="Top" Foreground="Red"/>
+        <fa:ImageAwesome  Name="RegisterLoader" Icon="Refresh" Width="50" Height="50" Spin="True" SpinDuration="1.2" Margin="0,-100,0,0" Visibility="Hidden"/>
     </Grid>
 </UserControl>
