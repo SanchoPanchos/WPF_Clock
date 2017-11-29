@@ -2,6 +2,9 @@
 
 namespace WPF_HW1.Model
 {
+    /// <summary>
+    /// Клас управляє об'єктами сутностей, тобто заповнює об'єкти з даними з БД, відстежує зміни та зберігає дані в БД
+    /// </summary>
     class MyContext : DbContext
     {
 
@@ -12,7 +15,9 @@ namespace WPF_HW1.Model
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MyContext, DBConfig>("SanyaConnection"));
         }
 
-        
+        /// <summary>
+        /// Колекції вказаних об'єктів в контексті
+        /// </summary>
         public DbSet<User> Users { get; set; }
         public DbSet<TimeClock> TimeClocks { get; set; }
 
